@@ -1,0 +1,12 @@
+{{define "template/ademo"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>A demo</div>
+</body>
+</html>
+{{end}}
