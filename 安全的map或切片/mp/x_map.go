@@ -1,14 +1,17 @@
 package mp
 
 import (
-	"go_demo/安全的map/lk"
+	"go_demo/安全的map或切片/lk"
 	"sync"
 )
 
 type IXMap interface {
+	lk.IXLock
 	Set(key, value string)
 	Get(key string) string
 }
+
+var _ IXMap = (*XMap)(nil)
 
 type XMap struct {
 	lk.IXLock

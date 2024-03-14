@@ -1,6 +1,6 @@
 package partition
 
-import "go_demo/安全的map/mp"
+import "go_demo/安全的map或切片/mp"
 
 const (
 	partitionNumber = 6
