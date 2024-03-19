@@ -1,8 +1,8 @@
 package mp
 
 import (
+	"read_file_config/lk"
 	"sync"
-	"xaq/lk"
 )
 
 type IXMap interface {
