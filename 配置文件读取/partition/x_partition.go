@@ -1,6 +1,6 @@
 package partition
 
-import "xaq/mp"
+import "read_file_config/mp"
 
 const (
 	partitionNumber = 6

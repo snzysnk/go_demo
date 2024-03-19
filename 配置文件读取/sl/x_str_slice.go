@@ -2,8 +2,8 @@ package sl
 
 import (
 	"errors"
+	"read_file_config/lk"
 	"sync"
-	"xaq/lk"
 )
 
 type IXStrSlice interface {

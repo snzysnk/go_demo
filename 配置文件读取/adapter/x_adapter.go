@@ -1,8 +1,8 @@
 package adapter
 
 import (
-	"go_demo/安全的map或切片/mp"
-	"go_demo/安全的map或切片/sl"
+	"read_file_config/mp"
+	"read_file_config/sl"
 )
 
 type XAdapterFile struct {
