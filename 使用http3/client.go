@@ -34,7 +34,9 @@ func main() {
 		log.Fatal(err)
 	}
 
+	//获取证书数据
 	AddRootCA(pool)
+	//构建支持http3的中间件
 	roundTripper := &http3.RoundTripper{
 		TLSClientConfig: &tls.Config{
 			RootCAs: pool,
@@ -42,6 +44,7 @@ func main() {
 		QuicConfig: &quic.Config{},
 	}
 	defer roundTripper.Close()
+	//给标准客户端添加http3中间件
 	h3Client := &http.Client{
 		Transport: roundTripper,
 	}
