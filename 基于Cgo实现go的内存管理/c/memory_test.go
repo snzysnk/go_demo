@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
-	"study/c"
 	"testing"
 	"unsafe"
 )
@@ -13,7 +12,7 @@ func IsLittleEndian() bool {
 	n := 0x01020304
 	u := unsafe.Pointer(&n)
 	pb := (*byte)(u)
-	b := *pb //8字节
+	b := *pb //8位
 	return b == 0x04
 }
 
@@ -32,13 +31,13 @@ func intToByte(n uint32) []byte {
 }
 
 func TestMemory(t *testing.T) {
-	data := c.Malloc(4)
+	data := Malloc(4)
 	fmt.Printf("data %+v,%T\n", data, data)
 	myData := (*uint32)(data)
 	*myData = 6
 	fmt.Printf("data %+v,%T\n", *myData, *myData)
 	var a uint32 = 101
-	c.MemCopy(data, intToByte(a), 4)
+	MemCopy(data, intToByte(a), 4)
 	fmt.Printf("data %+v,%T\n", *myData, *myData)
-	c.Free(data)
+	Free(data)
 }
