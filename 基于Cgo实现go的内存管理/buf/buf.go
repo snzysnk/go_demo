@@ -1,16 +1,19 @@
 package buf
 
 import (
-	"go_demo/基于Cgo实现go的内存管理/c"
+	"go_demo/c"
 	"unsafe"
 )
 
 type IBuf interface {
-	SetBytes([]byte)
-	GetBytes() []byte
-	Free()
-	Copy(buf *IBuf)
+	SetBytes([]byte)  //设置数据
+	GetBytes() []byte //获取数据
+	Free()            //释放数据
+	Copy(buf IBuf)    //拷贝数据
+	GetLength() int
 }
+
+var _ IBuf = (*Buf)(nil)
 
 type Buf struct {
 	Next     *Buf
@@ -20,13 +23,26 @@ type Buf struct {
 	data     unsafe.Pointer
 }
 
-func (b *Buf) Copy(buf *IBuf) {
-	//TODO implement me
-	panic("implement me")
+func NewBuf(size int) IBuf {
+	return &Buf{
+		length: 0,
+		head:   0,
+		data:   c.Malloc(size),
+	}
+}
+
+func (b *Buf) Copy(other IBuf) {
+	c.MemCopy(b.data, other.GetBytes(), other.GetLength())
+	b.head = 0
+	b.length = other.GetLength()
 }
 
 func (b *Buf) Free() {
 	c.Free(b.data)
+}
+
+func (b *Buf) GetLength() int {
+	return b.length
 }
 
 func (b *Buf) SetBytes(bytes []byte) {
@@ -36,14 +52,4 @@ func (b *Buf) SetBytes(bytes []byte) {
 
 func (b *Buf) GetBytes() []byte {
 	return c.GetBytes(unsafe.Pointer(uintptr(b.data)+uintptr(b.head)), b.length)
-}
-
-func NewBuf(size int) *Buf {
-	return &Buf{
-		Next:     nil,
-		Capacity: size,
-		length:   0,
-		head:     0,
-		data:     c.Malloc(size),
-	}
 }
