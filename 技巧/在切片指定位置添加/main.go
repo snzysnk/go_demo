@@ -28,7 +28,17 @@ func Next() {
 	fmt.Println(example)
 }
 
+func Three() {
+	insertPosition = 0
+	example[insertPosition] = "55555"
+	example = append(example, "")
+	copy(example[insertPosition+2:], example[insertPosition+1:])
+	example[insertPosition+1] = "6666"
+	fmt.Println(example)
+}
+
 func main() {
 	First() //[a b c d x e f g h i j k l m]
 	Next()  //[a b c d x e f g h i j k l m]
+	Three()
 }
