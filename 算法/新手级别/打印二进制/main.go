@@ -29,12 +29,9 @@ func RestoreBinary(str string) int {
 
 	for i := 1; i <= 31; i++ {
 		n, _ := strconv.Atoi(strSlice[i])
+		//展现取反
 		if !isPositiveNumber {
-			if n == 0 {
-				n = 1
-			} else {
-				n = 0
-			}
+			n = 1 - n
 		}
 		result += (1 << (31 - i)) * n
 	}
@@ -42,7 +39,7 @@ func RestoreBinary(str string) int {
 	if isPositiveNumber {
 		return result
 	}
-
+	//展现取反+1
 	return -(result + 1)
 }
 
