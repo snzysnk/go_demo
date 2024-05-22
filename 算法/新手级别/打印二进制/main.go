@@ -43,6 +43,10 @@ func RestoreBinary(str string) int {
 	return -(result + 1)
 }
 
+func Transform(n int) int {
+	return ^n + 1 // = -n
+}
+
 func main() {
 	fmt.Println(PrintBinary(2))  //00000000000000000000000000000010
 	fmt.Println(PrintBinary(4))  //00000000000000000000000000000100
@@ -54,4 +58,7 @@ func main() {
 	fmt.Println(RestoreBinary(PrintBinary(2)))    //2
 	fmt.Println(RestoreBinary(PrintBinary(10)))   //10
 	fmt.Println(RestoreBinary(PrintBinary(-101))) //101
+
+	fmt.Println(Transform(10))  //-10
+	fmt.Println(Transform(-10)) //10
 }
