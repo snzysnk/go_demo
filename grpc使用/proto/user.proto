@@ -1,0 +1,15 @@
+syntax = "proto3";
+option go_package = "service/api;user";
+
+message LoginRequest{
+  string Name = 1;
+  string Password = 2;
+}
+
+message LoginResponse{
+  string token = 1;
+}
+
+service LoginService{
+  rpc GetUserInfo(LoginRequest) returns (LoginResponse){}
+}
