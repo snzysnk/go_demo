@@ -28,7 +28,6 @@ type Pusher struct {
 }
 
 func NewPusher(size int, timeOut time.Duration) MQ {
-	fmt.Println(333)
 	return &Pusher{
 		messageSize: size,
 		subscribers: make(map[Subscriber]MatchTopic),
@@ -52,18 +51,22 @@ func (p *Pusher) Push(message *Message) {
 
 	for subscriber, topic := range p.subscribers {
 		wg.Add(1)
-		go dispatchMessage(subscriber, message, topic, &wg)
+		go p.dispatchMessage(subscriber, message, topic, &wg)
 	}
 
 	wg.Wait()
 }
 
-func dispatchMessage(subscriber Subscriber, message *Message, topic MatchTopic, wg *sync.WaitGroup) {
+func (p *Pusher) dispatchMessage(subscriber Subscriber, message *Message, topic MatchTopic, wg *sync.WaitGroup) {
 	defer wg.Done()
-	if topic == nil || topic(message) {
-		subscriber <- message
+	if topic != nil && !topic(message) {
+		return
 	}
-	return
+	select {
+	case subscriber <- message:
+	case <-time.After(p.timeOut):
+		fmt.Println("发送超时！！！")
+	}
 }
 
 func (p *Pusher) Close() {
@@ -79,4 +82,5 @@ func (p *Pusher) Delete(subscriber Subscriber) {
 	p.m.Lock()
 	defer p.m.Unlock()
 	delete(p.subscribers, subscriber)
+	close(subscriber)
 }
