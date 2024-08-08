@@ -3,5 +3,5 @@ package main
 import "xvalidate/validate"
 
 func main() {
-	validate.F5()
+	validate.F7()
 }

@@ -1,6 +1,10 @@
 package validate
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+	"reflect"
+)
 
 func F1() {
 	var ex []interface{}
@@ -44,4 +48,26 @@ func F5() {
 	fmt.Println("len获取的是实际长度:", len(ch))
 	fmt.Println("cap才是获取的容量:", cap(ch))
 	defer close(ch)
+}
+
+func F6() {
+	fmt.Println(math.Float32bits(1.00))
+}
+
+type mF7 struct {
+	reflect.Value
+}
+
+func F7() {
+	var a interface{}
+	var b interface{}
+	a = reflect.ValueOf("2")
+	b = mF7{}
+	if value, ok := a.(reflect.Value); ok {
+		fmt.Println("a:", value)
+	}
+
+	if value, ok := b.(reflect.Value); ok {
+		fmt.Println("b:", value)
+	}
 }
