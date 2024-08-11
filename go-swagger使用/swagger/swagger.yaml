@@ -1,14 +1,68 @@
 basePath: /
 consumes:
     - application/json
+definitions:
+    User:
+        properties:
+            age:
+                description: 年龄
+                format: int64
+                type: integer
+                x-go-name: Age
+            like:
+                description: 喜好
+                type: string
+                x-go-name: Like
+            name:
+                description: 名字
+                type: string
+                x-go-name: Name
+        required:
+            - name
+        type: object
+        x-go-package: x_go_swagger/swagger/api
 host: 127.0.0.1:9501
 info:
     description: Documentation of our awesome API.
     title: awesome .
     version: 0.1.0
-paths: {}
+paths:
+    /user:
+        get:
+            description: 查找用户
+            operationId: getUserRequest
+            parameters:
+                - description: in.path
+                  in: query
+                  name: name
+                  required: true
+                  type: string
+                  x-go-name: Name
+            responses:
+                "200":
+                    $ref: '#/responses/getUserResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            tags:
+                - User
 produces:
     - application/json
+responses:
+    errResponse:
+        description: ""
+        headers:
+            code:
+                format: int64
+                type: integer
+            message:
+                type: string
+    getUserResponse:
+        description: ""
+        headers:
+            Body:
+                description: in.body
+        schema:
+            $ref: '#/definitions/User'
 schemes:
     - http
     - https
