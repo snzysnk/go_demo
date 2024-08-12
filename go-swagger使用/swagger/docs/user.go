@@ -1,8 +1,10 @@
 package docs
 
-import "x_go_swagger/swagger/api"
+import (
+	api2 "x_go_swagger/api"
+)
 
-// swagger:route GET /user User getUserRequest
+// swagger:route GET /user user getUserRequest
 // 查找用户
 // responses:
 //	200: getUserResponse
@@ -18,5 +20,11 @@ type GetUserRequest struct {
 // swagger:response getUserResponse
 type GetUserResponse struct {
 	// in.body
-	Body api.User
+	Body api2.User
+}
+
+// swagger:response errResponse
+type ErrResponse struct {
+	// in.body
+	Body api2.ErrResponse
 }

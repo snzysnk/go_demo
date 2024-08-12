@@ -2,6 +2,17 @@ basePath: /
 consumes:
     - application/json
 definitions:
+    ErrResponse:
+        properties:
+            code:
+                format: int64
+                type: integer
+                x-go-name: Code
+            message:
+                type: string
+                x-go-name: Message
+        type: object
+        x-go-package: x_go_swagger/api
     User:
         properties:
             age:
@@ -17,10 +28,14 @@ definitions:
                 description: 名字
                 type: string
                 x-go-name: Name
+            sex:
+                description: 性别
+                type: string
+                x-go-name: Sex
         required:
             - name
         type: object
-        x-go-package: x_go_swagger/swagger/api
+        x-go-package: x_go_swagger/api
 host: 127.0.0.1:9501
 info:
     description: Documentation of our awesome API.
@@ -44,18 +59,17 @@ paths:
                 default:
                     $ref: '#/responses/errResponse'
             tags:
-                - User
+                - user
 produces:
     - application/json
 responses:
     errResponse:
         description: ""
         headers:
-            code:
-                format: int64
-                type: integer
-            message:
-                type: string
+            Body:
+                description: in.body
+        schema:
+            $ref: '#/definitions/ErrResponse'
     getUserResponse:
         description: ""
         headers:

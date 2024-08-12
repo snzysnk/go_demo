@@ -2,12 +2,10 @@ package main
 
 import (
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"x_go_swagger/swagger/api"
-	_ "x_go_swagger/swagger/docs"
-
-	"github.com/gin-gonic/gin"
+	"x_go_swagger/api"
 )
 
 var localUsers []api.User
@@ -27,6 +25,7 @@ func main() {
 				return
 			}
 		}
+
 		c.JSON(http.StatusOK, api.ErrResponse{
 			Code:    400,
 			Message: "查不到该用户",

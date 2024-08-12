@@ -8,4 +8,6 @@ type User struct {
 	Age int `json:"age"`
 	// 喜好
 	Like string `json:"like"`
+	// 性别
+	Sex string `json:"sex"`
 }
