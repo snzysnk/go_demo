@@ -1,7 +1,7 @@
 package docs
 
 import (
-	api2 "x_go_swagger/api"
+	"x_go_swagger/api"
 )
 
 // swagger:route GET /user user getUserRequest
@@ -20,11 +20,11 @@ type GetUserRequest struct {
 // swagger:response getUserResponse
 type GetUserResponse struct {
 	// in.body
-	Body api2.User
+	Body api.User
 }
 
 // swagger:response errResponse
 type ErrResponse struct {
 	// in.body
-	Body api2.ErrResponse
+	Body api.ErrResponse
 }

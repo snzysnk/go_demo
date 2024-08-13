@@ -17,6 +17,13 @@ func main() {
 		AllowAllOrigins: true, //本地测试，所以运行所有域名，ip跨域访问
 	}))
 
+	localUsers = append(localUsers, api.User{
+		Name: "天行九歌",
+		Age:  17,
+		Like: "动漫",
+		Sex:  "man",
+	})
+
 	r.GET("/user", func(c *gin.Context) {
 		userName := c.Param("name")
 		for _, user := range localUsers {
