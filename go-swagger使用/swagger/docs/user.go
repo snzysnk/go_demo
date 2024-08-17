@@ -19,12 +19,12 @@ type GetUserRequest struct {
 
 // swagger:response getUserResponse
 type GetUserResponse struct {
-	// in.body
+	// in:body
 	Body api.User
 }
 
 // swagger:response errResponse
 type ErrResponse struct {
-	// in.body
+	// in:body
 	Body api.ErrResponse
 }

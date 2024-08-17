@@ -65,16 +65,10 @@ produces:
 responses:
     errResponse:
         description: ""
-        headers:
-            Body:
-                description: in.body
         schema:
             $ref: '#/definitions/ErrResponse'
     getUserResponse:
         description: ""
-        headers:
-            Body:
-                description: in.body
         schema:
             $ref: '#/definitions/User'
 schemes:
