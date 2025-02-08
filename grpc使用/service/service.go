@@ -20,7 +20,8 @@ func StartRpcServer(ctx context.Context, address string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	server := grpc.NewServer()
+	// 加入日志拦截器
+	server := grpc.NewServer(grpc.ChainUnaryInterceptor(LogInterceptor()))
 	user.RegisterLoginServiceServer(server, &UserService{})
 	log.Fatal(server.Serve(listen))
 }
