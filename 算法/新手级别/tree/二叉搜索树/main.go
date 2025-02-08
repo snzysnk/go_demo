@@ -8,14 +8,18 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+type BinarySearchTree struct {
+	Root *TreeNode
+}
+
 func NewThreeNode(val int) *TreeNode {
 	return &TreeNode{
 		Val: val,
 	}
 }
 
-func (t *TreeNode) search(num int) *TreeNode {
-	node := t
+func (t *BinarySearchTree) search(num int) *TreeNode {
+	node := t.Root
 	for node != nil {
 		if node.Val > num {
 			node = node.Left
@@ -29,7 +33,7 @@ func (t *TreeNode) search(num int) *TreeNode {
 }
 
 // NewData 构建1-15的二叉搜索树
-func NewData() *TreeNode {
+func NewData() *BinarySearchTree {
 	node1 := NewThreeNode(1)
 	node2 := NewThreeNode(2)
 	node3 := NewThreeNode(3)
@@ -52,7 +56,9 @@ func NewData() *TreeNode {
 	node12.Left, node12.Right = node10, node14
 	node10.Left, node10.Right = node9, node11
 	node14.Left, node14.Right = node13, node15
-	return node8
+	return &BinarySearchTree{
+		Root: node8,
+	}
 }
 
 //go:generate go run main.go
